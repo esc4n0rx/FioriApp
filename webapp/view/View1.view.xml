@@ -1,6 +1,16 @@
 <mvc:View controllerName="project1.controller.View1"
     xmlns:mvc="sap.ui.core.mvc"
     xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
+    <Page id="page" title="{i18n>menuTitle}">
+        <content>
+            <VBox class="sapUiMediumMargin">
+                <Title text="{i18n>menuTitle}" level="H2" class="sapUiMediumMarginBottom"/>
+                <Button 
+                    text="{i18n>inventoryReportTitle}"
+                    press="onNavigateToInventoryReport"
+                    type="Emphasized"
+                    class="sapUiMediumMarginBottom"/>
+            </VBox>
+        </content>
     </Page>
 </mvc:View>

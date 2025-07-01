@@ -38,7 +38,8 @@
       "minUI5Version": "1.136.2",
       "libs": {
         "sap.m": {},
-        "sap.ui.core": {}
+        "sap.ui.core": {},
+        "sap.ui.table": {}
       }
     },
     "contentDensities": {
@@ -51,6 +52,9 @@
         "settings": {
           "bundleName": "project1.i18n.i18n"
         }
+      },
+      "inventory": {
+        "type": "sap.ui.model.json.JSONModel"
       }
     },
     "resources": {
@@ -79,12 +83,34 @@
           "target": [
             "TargetView1"
           ]
+        },
+        {
+          "name": "InventoryReport",
+          "pattern": "inventory",
+          "target": [
+            "TargetInventoryReport"
+          ]
+        },
+        {
+          "name": "InventoryResults",
+          "pattern": "inventory/results",
+          "target": [
+            "TargetInventoryResults"
+          ]
         }
       ],
       "targets": {
         "TargetView1": {
           "id": "View1",
           "name": "View1"
+        },
+        "TargetInventoryReport": {
+          "id": "InventoryReport",
+          "name": "InventoryReport"
+        },
+        "TargetInventoryResults": {
+          "id": "InventoryResults",
+          "name": "InventoryResults"
         }
       }
     },

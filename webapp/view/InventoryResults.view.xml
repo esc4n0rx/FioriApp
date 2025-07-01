@@ -1,0 +1,189 @@
+<mvc:View controllerName="project1.controller.InventoryResults"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:table="sap.ui.table">
+    
+    <Page id="inventoryResultsPage" title="{i18n>inventoryResultsTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Panel id="_IDGenPanel1" headerText="{i18n>inventoryResultsTitle}" class="sapUiResponsiveMargin">
+                <content>
+                    <table:Table 
+                        id="inventoryTable"
+                        rows="{inventory>/results}"
+                        selectionMode="MultiToggle"
+                        enableSelectAll="true"
+                        ariaLabelledBy="title"
+                        visibleRowCount="15"
+                        minAutoRowCount="10"
+                        class="sapUiSizeCompact">
+                        
+                        <table:extension>
+                            <Toolbar id="_IDGenToolbar1">
+                                <Title id="_IDGenTitle" text="{i18n>inventoryResultsTitle}" level="H4"/>
+                                <ToolbarSpacer id="_IDGenToolbarSpacer1"/>
+                                <Button id="_IDGenButton2" text="Carregar CSV" press="onLoadCSV" type="Emphasized"/>
+                                <Button id="_IDGenButton3" text="Exportar" press="onExport"/>
+                            </Toolbar>
+                        </table:extension>
+                        
+                        <table:columns>
+                            <table:Column id="_IDGenColumn1" width="8rem" sortProperty="inventoryDoc" filterProperty="inventoryDoc">
+                                <Label id="_IDGenLabel3" text="{i18n>inventoryDoc}"/>
+                                <table:template>
+                                    <Text id="_IDGenText4" text="{inventory>inventoryDoc}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn2" width="5rem" sortProperty="item" filterProperty="item">
+                                <Label id="_IDGenLabel7" text="{i18n>item}"/>
+                                <table:template>
+                                    <Text id="_IDGenText5" text="{inventory>item}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn3" width="8rem" sortProperty="position" filterProperty="position">
+                                <Label id="_IDGenLabel8" text="{i18n>position}"/>
+                                <table:template>
+                                    <Text id="_IDGenText6" text="{inventory>position}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn4" width="10rem" sortProperty="materialCode" filterProperty="materialCode">
+                                <Label id="_IDGenLabel9" text="{i18n>materialCode}"/>
+                                <table:template>
+                                    <Text id="_IDGenText7" text="{inventory>materialCode}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn5" width="15rem" sortProperty="materialDesc" filterProperty="materialDesc">
+                                <Label id="_IDGenLabel10" text="{i18n>materialDesc}"/>
+                                <table:template>
+                                    <Text id="_IDGenText8" text="{inventory>materialDesc}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn6" width="5rem" sortProperty="ud" filterProperty="ud">
+                                <Label id="_IDGenLabel11" text="{i18n>ud}"/>
+                                <table:template>
+                                    <Text id="_IDGenText9" text="{inventory>ud}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn7" width="8rem" sortProperty="date" filterProperty="date">
+                                <Label id="_IDGenLabel12" text="{i18n>date}"/>
+                                <table:template>
+                                    <Text id="_IDGenText10" text="{inventory>date}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn8" width="6rem" sortProperty="status" filterProperty="status">
+                                <Label id="_IDGenLabel13" text="{i18n>status}"/>
+                                <table:template>
+                                    <Text id="_IDGenText11" text="{inventory>status}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn9" width="12rem" sortProperty="statusDesc" filterProperty="statusDesc">
+                                <Label id="_IDGenLabel14" text="{i18n>statusDesc}"/>
+                                <table:template>
+                                    <Text id="_IDGenText12" text="{inventory>statusDesc}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn10" width="8rem" sortProperty="currentCount" filterProperty="currentCount">
+                                <Label id="_IDGenLabel15" text="{i18n>currentCount}"/>
+                                <table:template>
+                                    <Text id="_IDGenText13" text="{inventory>currentCount}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn11" width="6rem" sortProperty="deptType" filterProperty="deptType">
+                                <Label id="_IDGenLabel16" text="{i18n>deptType}"/>
+                                <table:template>
+                                    <Text id="_IDGenText14" text="{inventory>deptType}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn12" width="6rem" sortProperty="depot" filterProperty="depot">
+                                <Label id="_IDGenLabel17" text="{i18n>depot}"/>
+                                <table:template>
+                                    <Text id="_IDGenText15" text="{inventory>depot}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn13" width="8rem" sortProperty="noCount" filterProperty="noCount">
+                                <Label id="_IDGenLabel18" text="{i18n>noCount}"/>
+                                <table:template>
+                                    <Text id="_IDGenText16" text="{inventory>noCount}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn14" width="5rem" sortProperty="um" filterProperty="um">
+                                <Label id="_IDGenLabel19" text="{i18n>um}"/>
+                                <table:template>
+                                    <Text id="_IDGenText17" text="{inventory>um}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn15" width="8rem" sortProperty="baseQty" filterProperty="baseQty">
+                                <Label id="_IDGenLabel20" text="{i18n>baseQty}"/>
+                                <table:template>
+                                    <Text id="_IDGenText18" text="{inventory>baseQty}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn16" width="8rem" sortProperty="count1" filterProperty="count1">
+                                <Label id="_IDGenLabel21" text="{i18n>count1}"/>
+                                <table:template>
+                                    <Text id="_IDGenText19" text="{inventory>count1}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn17" width="8rem" sortProperty="diff1" filterProperty="diff1">
+                                <Label id="_IDGenLabel22" text="{i18n>diff1}"/>
+                                <table:template>
+                                    <Text id="_IDGenText20" text="{inventory>diff1}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn18" width="8rem" sortProperty="user1" filterProperty="user1">
+                                <Label id="_IDGenLabel23" text="{i18n>user1}"/>
+                                <table:template>
+                                    <Text id="_IDGenText21" text="{inventory>user1}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn19" width="8rem" sortProperty="lastCount" filterProperty="lastCount">
+                                <Label id="_IDGenLabel24" text="{i18n>lastCount}"/>
+                                <table:template>
+                                    <Text id="_IDGenText22" text="{inventory>lastCount}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn20" width="8rem" sortProperty="lastDiff" filterProperty="lastDiff">
+                                <Label id="_IDGenLabel25" text="{i18n>lastDiff}"/>
+                                <table:template>
+                                    <Text id="_IDGenText23" text="{inventory>lastDiff}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn21" width="8rem" sortProperty="diffValue" filterProperty="diffValue">
+                                <Label id="_IDGenLabel26" text="{i18n>diffValue}"/>
+                                <table:template>
+                                    <Text id="_IDGenText24" text="{inventory>diffValue}"/>
+                                </table:template>
+                            </table:Column>
+                            
+                            <table:Column id="_IDGenColumn22" width="8rem" sortProperty="lastUser" filterProperty="lastUser">
+                                <Label id="_IDGenLabel27" text="{i18n>lastUser}"/>
+                                <table:template>
+                                    <Text id="_IDGenText25" text="{inventory>lastUser}"/>
+                                </table:template>
+                            </table:Column>
+                        </table:columns>
+                    </table:Table>
+                </content>
+            </Panel>
+        </content>
+    </Page>
+</mvc:View>

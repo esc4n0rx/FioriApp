@@ -19,6 +19,9 @@ sap.ui.define([
             // set the device model
             this.setModel(models.createDeviceModel(), "device");
 
+            // set the inventory model
+            this.setModel(models.createInventoryModel(), "inventory");
+
             // enable routing
             this.getRouter().initialize();
         }

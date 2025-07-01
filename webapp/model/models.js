@@ -14,7 +14,19 @@ function (JSONModel, Device) {
             var oModel = new JSONModel(Device);
             oModel.setDefaultBindingMode("OneWay");
             return oModel;
+        },
+
+        /**
+         * Creates the inventory model for managing inventory data.
+         * @returns {sap.ui.model.json.JSONModel} The inventory model.
+         */
+        createInventoryModel: function () {
+            var oModel = new JSONModel({
+                filters: {},
+                results: []
+            });
+            oModel.setDefaultBindingMode("TwoWay");
+            return oModel;
         }
     };
-
 });

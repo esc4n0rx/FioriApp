@@ -1,0 +1,79 @@
+<mvc:View controllerName="project1.controller.InventoryReport"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form">
+    
+    <Page id="inventoryReportPage" title="{i18n>inventoryReportViewTitle}" showNavButton="true" navButtonPress="onNavBack">
+        <content>
+            <Panel id="_IDGenPanel" headerText="{i18n>inventoryReportViewTitle}" class="sapUiResponsiveMargin">
+                <content>
+                    <form:SimpleForm id="_IDGenSimpleForm" 
+                        editable="true"
+                        layout="ResponsiveGridLayout"
+                        labelSpanXL="3"
+                        labelSpanL="3"
+                        labelSpanM="3"
+                        labelSpanS="12"
+                        adjustLabelSpan="false"
+                        emptySpanXL="4"
+                        emptySpanL="4"
+                        emptySpanM="4"
+                        emptySpanS="0"
+                        columnsXL="1"
+                        columnsL="1"
+                        columnsM="1"
+                        singleContainerFullSize="false">
+                        
+                        <content>
+                            <Label id="_IDGenLabel" text="{i18n>depositNumber}"/>
+                            <Input id="depositNumberInput" value="{/depositNumber}" maxLength="10"/>
+                            
+                            <Label id="_IDGenLabel1" text="{i18n>inventoryDocument}"/>
+                            <HBox id="_IDGenHBox">
+                                <Input id="inventoryDocFromInput" value="{/inventoryDocFrom}" maxLength="10" width="150px"/>
+                                <Text id="_IDGenText" text="até" class="sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+                                <Input id="inventoryDocToInput" value="{/inventoryDocTo}" maxLength="10" width="150px"/>
+                            </HBox>
+                            
+                            <Label id="_IDGenLabel2" text="{i18n>material}"/>
+                            <HBox id="_IDGenHBox1">
+                                <Input id="materialFromInput" value="{/materialFrom}" maxLength="18" width="200px"/>
+                                <Text id="_IDGenText1" text="até" class="sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+                                <Input id="materialToInput" value="{/materialTo}" maxLength="18" width="200px"/>
+                            </HBox>
+                            
+                            <Label id="_IDGenLabel4" text="{i18n>depositPosition}"/>
+                            <HBox id="_IDGenHBox2">
+                                <Input id="positionFromInput" value="{/positionFrom}" maxLength="10" width="150px"/>
+                                <Text id="_IDGenText2" text="até" class="sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+                                <Input id="positionToInput" value="{/positionTo}" maxLength="10" width="150px"/>
+                            </HBox>
+                            
+                            <Label id="_IDGenLabel5" text="{i18n>countingDate}"/>
+                            <HBox id="_IDGenHBox3">
+                                <DatePicker id="countingDateFromPicker" value="{/countingDateFrom}" width="150px"/>
+                                <Text id="_IDGenText3" text="até" class="sapUiTinyMarginBegin sapUiTinyMarginEnd"/>
+                                <DatePicker id="countingDateToPicker" value="{/countingDateTo}" width="150px"/>
+                            </HBox>
+                            
+                            <Label id="_IDGenLabel6" text="{i18n>layout}"/>
+                            <ComboBox id="layoutComboBox" selectedKey="{/layout}" width="200px">
+                                <items>
+                                    <core:Item id="_IDGenItem" key="ALV" text="ALV List"/>
+                                    <core:Item id="_IDGenItem1" key="GRID" text="Grid"/>
+                                </items>
+                            </ComboBox>
+                        </content>
+                    </form:SimpleForm>
+                </content>
+            </Panel>
+        </content>
+        <footer>
+            <Toolbar id="_IDGenToolbar">
+                <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+                <Button id="_IDGenButton" text="{i18n>executeButton}" type="Emphasized" press="onExecuteReport"/>
+                <Button id="_IDGenButton1" text="{i18n>backButton}" press="onNavBack"/>
+            </Toolbar>
+        </footer>
+    </Page>
+</mvc:View>
