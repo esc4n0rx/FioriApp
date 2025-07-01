@@ -2,19 +2,21 @@ sap.ui.define([
     "sap/ui/core/mvc/Controller",
     "sap/m/MessageToast",
     "project1/utils/CSVParser"
-], (Controller, MessageToast, CSVParser) => {
+], function (Controller, MessageToast, CSVParser) {
     "use strict";
 
     return Controller.extend("project1.controller.InventoryResults", {
-        onInit() {
-            const oRouter = this.getRouter();
+        onInit: function () {
+            var oRouter = this.getRouter();
             oRouter.getRoute("InventoryResults").attachPatternMatched(this._onObjectMatched, this);
+            
+            console.log("InventoryResults controller initialized successfully");
         },
 
         /**
          * Método chamado quando a rota é ativada
          */
-        _onObjectMatched() {
+        _onObjectMatched: function () {
             // Carrega dados automáticos ou de exemplo
             this._loadSampleData();
         },
@@ -22,11 +24,11 @@ sap.ui.define([
         /**
          * Carrega dados de exemplo
          */
-        _loadSampleData() {
-            const oInventoryModel = this.getOwnerComponent().getModel("inventory");
+        _loadSampleData: function () {
+            var oInventoryModel = this.getOwnerComponent().getModel("inventory");
             
             // Dados de exemplo
-            const aSampleData = this._createSampleData();
+            var aSampleData = this._createSampleData();
             
             oInventoryModel.setProperty("/results", aSampleData);
             MessageToast.show(this.getResourceBundle().getText("dataLoaded"));
@@ -36,23 +38,23 @@ sap.ui.define([
          * Cria dados de exemplo para demonstração
          * @returns {Array} Array com dados de exemplo
          */
-        _createSampleData() {
+        _createSampleData: function () {
             return [
                 {
-                    inventoryDoc: "1000001",
+                    inventoryDoc: "16789",
                     item: "10",
-                    position: "A-01-01",
-                    materialCode: "MAT001",
-                    materialDesc: "Produto A - Descrição Completa",
-                    ud: "PC",
+                    position: "H3S0100203",
+                    materialCode: "134567",
+                    materialDesc: "COCA COLA LATA 350ML",
+                    ud: "UN",
                     date: "2025-07-01",
                     status: "01",
                     statusDesc: "Contagem Inicial",
                     currentCount: "100",
-                    deptType: "FG",
-                    depot: "1000",
+                    deptType: "D01",
+                    depot: "DP01",
                     noCount: "",
-                    um: "PC",
+                    um: "UN",
                     baseQty: "95",
                     count1: "100",
                     diff1: "5",
@@ -75,18 +77,18 @@ sap.ui.define([
                     lastUser: "USER001"
                 },
                 {
-                    inventoryDoc: "1000001",
+                    inventoryDoc: "16889",
                     item: "20",
-                    position: "A-01-02",
-                    materialCode: "MAT002",
-                    materialDesc: "Produto B - Material Especial",
+                    position: "H3S0100204",
+                    materialCode: "134567",
+                    materialDesc: "ALCATRAO 600KG",
                     ud: "KG",
                     date: "2025-07-01",
                     status: "02",
                     statusDesc: "Recontagem Necessária",
                     currentCount: "50",
-                    deptType: "RM",
-                    depot: "1000",
+                    deptType: "D01",
+                    depot: "DP01",
                     noCount: "",
                     um: "KG",
                     baseQty: "55",
@@ -111,18 +113,18 @@ sap.ui.define([
                     lastUser: "USER003"
                 },
                 {
-                    inventoryDoc: "1000002",
+                    inventoryDoc: "16989",
                     item: "10",
-                    position: "B-02-01",
-                    materialCode: "MAT003",
-                    materialDesc: "Produto C - Componente Crítico",
+                    position: "H3S0100205",
+                    materialCode: "134568",
+                    materialDesc: "AGUA DE COCO INTEGRAL LYNV 1L",
                     ud: "UN",
                     date: "2025-07-01",
                     status: "03",
                     statusDesc: "Contagem Finalizada",
                     currentCount: "200",
-                    deptType: "SG",
-                    depot: "2000",
+                    deptType: "D40",
+                    depot: "DP40",
                     noCount: "X",
                     um: "UN",
                     baseQty: "200",
@@ -152,16 +154,17 @@ sap.ui.define([
         /**
          * Carrega dados de um arquivo CSV
          */
-        onLoadCSV() {
-            const oFileUploader = document.createElement("input");
+        onLoadCSV: function () {
+            var oFileUploader = document.createElement("input");
             oFileUploader.type = "file";
             oFileUploader.accept = ".csv";
             oFileUploader.style.display = "none";
             
-            oFileUploader.addEventListener("change", (event) => {
-                const file = event.target.files[0];
+            var that = this;
+            oFileUploader.addEventListener("change", function(event) {
+                var file = event.target.files[0];
                 if (file) {
-                    this._processCSVFile(file);
+                    that._processCSVFile(file);
                 }
             });
             
@@ -174,19 +177,20 @@ sap.ui.define([
          * Processa o arquivo CSV carregado
          * @param {File} file - Arquivo CSV
          */
-        _processCSVFile(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
+        _processCSVFile: function (file) {
+            var that = this;
+            var reader = new FileReader();
+            reader.onload = function(e) {
                try {
-                   const csvContent = e.target.result;
-                   const parsedData = CSVParser.parse(csvContent);
+                   var csvContent = e.target.result;
+                   var parsedData = CSVParser.parse(csvContent);
                    
-                   const oInventoryModel = this.getOwnerComponent().getModel("inventory");
+                   var oInventoryModel = that.getOwnerComponent().getModel("inventory");
                    oInventoryModel.setProperty("/results", parsedData);
                    
-                   MessageToast.show(`${parsedData.length} registros carregados do CSV`);
+                   MessageToast.show(parsedData.length + " registros carregados do CSV");
                } catch (error) {
-                   MessageToast.show(this.getResourceBundle().getText("errorLoadingData"));
+                   MessageToast.show(that.getResourceBundle().getText("errorLoadingData"));
                    console.error("Erro ao processar CSV:", error);
                }
            };
@@ -197,9 +201,9 @@ sap.ui.define([
        /**
         * Exporta os dados da tabela
         */
-       onExport() {
-           const oInventoryModel = this.getOwnerComponent().getModel("inventory");
-           const aData = oInventoryModel.getProperty("/results") || [];
+       onExport: function () {
+           var oInventoryModel = this.getOwnerComponent().getModel("inventory");
+           var aData = oInventoryModel.getProperty("/results") || [];
            
            if (aData.length === 0) {
                MessageToast.show("Nenhum dado para exportar");
@@ -207,12 +211,12 @@ sap.ui.define([
            }
            
            // Converte para CSV
-           const csvContent = this._convertToCSV(aData);
+           var csvContent = this._convertToCSV(aData);
            
            // Download do arquivo
-           const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-           const link = document.createElement("a");
-           const url = URL.createObjectURL(blob);
+           var blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+           var link = document.createElement("a");
+           var url = URL.createObjectURL(blob);
            link.setAttribute("href", url);
            link.setAttribute("download", "inventario_" + new Date().toISOString().split('T')[0] + ".csv");
            link.style.visibility = 'hidden';
@@ -226,8 +230,8 @@ sap.ui.define([
         * @param {Array} aData - Array de dados
         * @returns {string} Conteúdo CSV
         */
-       _convertToCSV(aData) {
-           const headers = [
+       _convertToCSV: function (aData) {
+           var headers = [
                "Doc. de Inventário", "Item", "Posição", "Material", "Descr. Material",
                "UD", "Data", "Status", "Descrição do Status", "Contagem Atual",
                "Tp. Depto", "Depósito", "NÃO CONTAR", "UM", "Qtde Base",
@@ -237,10 +241,10 @@ sap.ui.define([
                "Dif. em R$", "Usuario - Ult."
            ];
            
-           let csvContent = headers.join(";") + "\n";
+           var csvContent = headers.join(";") + "\n";
            
-           aData.forEach(row => {
-               const values = [
+           aData.forEach(function(row) {
+               var values = [
                    row.inventoryDoc || "", row.item || "", row.position || "",
                    row.materialCode || "", row.materialDesc || "", row.ud || "",
                    row.date || "", row.status || "", row.statusDesc || "",
@@ -254,7 +258,7 @@ sap.ui.define([
                    row.lastCount || "", row.lastDiff || "", row.diffValue || "", row.lastUser || ""
                ];
                
-               csvContent += values.map(value => `"${value}"`).join(";") + "\n";
+               csvContent += values.map(function(value) { return '"' + value + '"'; }).join(";") + "\n";
            });
            
            return csvContent;
@@ -263,7 +267,7 @@ sap.ui.define([
        /**
         * Volta para a tela anterior
         */
-       onNavBack() {
+       onNavBack: function () {
            this.getRouter().navTo("InventoryReport");
        },
 
@@ -271,7 +275,7 @@ sap.ui.define([
         * Obtém o router da aplicação
         * @returns {sap.ui.core.routing.Router} Router instance
         */
-       getRouter() {
+       getRouter: function () {
            return this.getOwnerComponent().getRouter();
        },
 
@@ -279,7 +283,7 @@ sap.ui.define([
         * Obtém o resource bundle para i18n
         * @returns {sap.ui.model.resource.ResourceModel} Resource bundle
         */
-       getResourceBundle() {
+       getResourceBundle: function () {
            return this.getView().getModel("i18n").getResourceBundle();
        }
    });
